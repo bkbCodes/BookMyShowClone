@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+
 // Components
 import EntertainmentCardSlider from "../component/Entertainment/EntertainmentCard.Component"
 import HeroCarousel from "../component/HeroCarousel/HeroCarousel.Component"
@@ -12,6 +14,30 @@ const HomePage = () => {
   const [ premierMovies, setPremierMovies ] = useState([]);
   const [ onlineStreamEvent, setOnlineStreamEvent] = useState([]);
 
+  useEffect(() => {
+    const requestPopularMovies = async () => {
+      const getPopularMovies = await axios.get('/movie/popular');
+      setRecommendedMovies(getPopularMovies.data.results);
+    };
+    requestPopularMovies();
+  }, []);
+
+  useEffect(() => {
+    const requestTopRatedMovies = async () => {
+      const getTopRatedMovies = await axios.get('/movie/top_rated');
+      setPremierMovies(getTopRatedMovies.data.results);
+    };
+    requestTopRatedMovies();
+  }, []);
+
+  useEffect(() => {
+    const requestUpcomingMovies = async () => {
+      const getUpcomingMovies = await axios.get('/movie/upcoming');
+      setOnlineStreamEvent(getUpcomingMovies.data.results);
+    };
+    requestUpcomingMovies();
+  }, []);
+
   return (
     <>
       <HeroCarousel />
@@ -24,7 +50,7 @@ const HomePage = () => {
       <div className="container mx-auto px-4 md:px-12 my-8">
         <PosterSlider
           title="Recommended Movies"
-          subject="List of recommended movies"
+          subtitle="List of recommended movies"
           posters={recommendedMovies}
           isDark={false}
         />
@@ -42,7 +68,7 @@ const HomePage = () => {
           
           <PosterSlider 
             title = "Recommended Movies"
-            subject = "Brand new releases every Friday"
+            subtitle = "Brand new releases every Friday"
             posters = {premierMovies}
             isDark = {true}
           />
@@ -52,7 +78,7 @@ const HomePage = () => {
       <div className='container mx-auto px-4 md:px-12 my-8'>
       <PosterSlider 
             title = "Online Streaming Event"
-            subject = ""
+            subtitle = ""
             posters = {onlineStreamEvent}
             isDark = {false}
           />
