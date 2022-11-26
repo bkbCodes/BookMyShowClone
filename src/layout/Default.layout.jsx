@@ -1,4 +1,5 @@
 import React from 'react'
+import { Footer } from '../component/Footer/Footer.Component';
 import Navbar from '../component/Navbar/Navbar.Component';
 
 const DefaultLayoutHoc = (Component) => ({ ...props }) => {
@@ -8,7 +9,7 @@ const DefaultLayoutHoc = (Component) => ({ ...props }) => {
             <div className="bg-gray-100 overflow-hidden">
                 <Component {...props}/>
             </div>
-            <div>Footer</div>
+            <Footer />
         </div>
     )
 }

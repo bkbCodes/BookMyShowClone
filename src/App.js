@@ -2,7 +2,7 @@ import './App.css';
 import axios from 'axios';
 
 // Routing
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 // React Slick
 import "slick-carousel/slick/slick.css"; 
@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import HomePage from "./pages/Home.Page";
 import MoviePage from "./pages/Movie.Page";
 import Plays from "./pages/Play.Page";
+import PageNotFound from './pages/PageNotFound.Page';
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 axios.defaults.params = {};
@@ -23,6 +24,8 @@ function App() {
       <Route path='/' element={<HomePage />} />
       <Route path='/movie/:id' element={<MoviePage />} />
       <Route path='/plays' element={<Plays />} />
+      <Route path='/404' element={<PageNotFound />} />
+      <Route path="*" element={ <Navigate to="/404" replace />} />
     </Routes>
   );
 }

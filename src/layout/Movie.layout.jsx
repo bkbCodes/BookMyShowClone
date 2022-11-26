@@ -1,4 +1,5 @@
 import React from 'react'
+import { Footer } from '../component/Footer/Footer.Component';
 import MovieNavbar from '../component/Navbar/MovieNavbar.Component';
 
 const MovieLayoutHoc = (Component) => ({ ...props }) => {
@@ -6,7 +7,7 @@ const MovieLayoutHoc = (Component) => ({ ...props }) => {
         <div>
             <MovieNavbar />
             <Component {...props} />
-            <div>Footer</div>
+            <Footer />
         </div>
     )
 }
